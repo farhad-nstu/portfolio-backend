@@ -69,5 +69,10 @@ Route::group(['prefix' => 'admin','middleware'=>'auth', 'namespace'=>'Admin'], f
     Route::resource('service', 'ServiceController');
     Route::resource('member', 'MemberController');
     Route::resource('client', 'ClientController');
+    Route::resource('about', 'AboutController');
+    Route::resource('skill', 'SkillController');
+    Route::resource('attribute', 'AttributeController');
+    Route::resource('award', 'AwardController');
+    Route::resource('education', 'EducationController');
 });
 

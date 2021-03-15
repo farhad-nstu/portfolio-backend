@@ -210,6 +210,98 @@
           </ul>
         </li>
 
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">About Manage</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('about.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">List</span>
+              </a>
+            </li>
+            <li class="nk-menu-item">
+              <a href="{{ route('about.create') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">Add</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">Education Manage</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('education.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">List</span>
+              </a>
+            </li>
+            <li class="nk-menu-item">
+              <a href="{{ route('education.create') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">Add</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">Skill Manage</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('skill.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">List</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">Attribute Manage</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('attribute.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">List</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">Award Manage</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('award.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">List</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
         
 
         @endif
