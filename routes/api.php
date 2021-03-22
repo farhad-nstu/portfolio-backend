@@ -27,5 +27,6 @@ Route::get('projects', 'API\CommonController@get_projects');
 Route::get('services', 'API\CommonController@get_services');
 Route::get('members', 'API\CommonController@get_members');
 Route::post('contact', 'API\CommonController@contact');
-
+Route::get('about', 'API\CommonController@about');
+Route::get('skills', 'API\CommonController@skill');
 

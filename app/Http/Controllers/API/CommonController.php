@@ -10,6 +10,8 @@ use App\Member;
 use App\Contact;
 use DB;
 use Auth;
+use App\About;
+use App\Skill;
 
 class CommonController extends Controller
 {
@@ -50,6 +52,20 @@ class CommonController extends Controller
         $contact->message = $request->message;
         $contact->save();
         return response()->json(['success' => 'Contact Successfully Saved!']);
+    }
+
+    public function about()
+    {
+        $abouts = About::all();
+        $description = strip_tags($abouts[0]->description);
+        $experince = strip_tags($abouts[0]->professional_experience);
+        return response()->json(['abouts' => $abouts, 'description' => $description, 'experince' => $experince]);
+    }
+
+    public function skill()
+    {
+        $skills = Skill::with('attributes')->get();
+        return response()->json($skills);
     }
 
     public function get_subcategories()

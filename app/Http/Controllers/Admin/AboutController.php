@@ -47,7 +47,7 @@ class AboutController extends Controller
         $image = $request->file( 'image' );
         $filename    = $image->getClientOriginalName();
         $image_resize = Image::make( $image->getRealPath() );
-        $image_resize->resize( 800, 800 );
+        $image_resize->resize( 300, 300 );
         $image_resize->save( public_path( 'images/' .$filename ) );
         $about->image = 'images/'.$filename;
 
@@ -82,11 +82,11 @@ class AboutController extends Controller
 
         if(!empty($request->image)){
 	        $image = $request->file( 'image' );
-            $filename    = $image->getaboutOriginalName();
+            $filename    = $image->getClientOriginalName();
             $image_resize = Image::make( $image->getRealPath() );
-            $image_resize->resize( 800, 800 );
+            $image_resize->resize( 300, 300 );
             $image_resize->save( public_path( 'images/' .$filename ) );
-	        unlink($about->image);
+	        unlink(asset($about->image));
 	        $about->image = 'images/'.$filename;
         }
 
