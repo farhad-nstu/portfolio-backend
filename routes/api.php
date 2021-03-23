@@ -29,4 +29,5 @@ Route::get('members', 'API\CommonController@get_members');
 Route::post('contact', 'API\CommonController@contact');
 Route::get('about', 'API\CommonController@about');
 Route::get('skills', 'API\CommonController@skill');
+Route::get('educations', 'API\CommonController@education');
 

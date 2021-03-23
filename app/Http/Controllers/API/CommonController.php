@@ -12,6 +12,7 @@ use DB;
 use Auth;
 use App\About;
 use App\Skill;
+use App\Education;
 
 class CommonController extends Controller
 {
@@ -66,6 +67,12 @@ class CommonController extends Controller
     {
         $skills = Skill::with('attributes')->get();
         return response()->json($skills);
+    }
+
+    public function education()
+    {
+        $educations = Education::all();
+        return response()->json($educations);
     }
 
     public function get_subcategories()

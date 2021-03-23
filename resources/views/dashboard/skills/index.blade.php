@@ -53,12 +53,6 @@ skill
                 <div class="modal-content">
                   <a href="#" class="close" data-dismiss="modal"><em class="icon ni ni-cross-sm"></em></a>
                   <div class="modal-body modal-body-lg">
-                                  <!-- <h5 class="title">Details</h5>
-                                  <ul class="nk-nav nav nav-tabs">
-                                    <li class="nav-item">
-                                      <a class="nav-link active" data-toggle="tab" href="#personal">Lead Details</a>
-                                    </li>
-                                  </ul> -->
                                   <div class="tab-content">
                                     <div class="tab-pane active" id="personal">
 
@@ -99,15 +93,12 @@ skill
                                           <span><em class="icon ni ni-pen-fill"></em></span>
                                         </a>
                                         
-                                        <a href="#" class="btn btn-sm btn-danger"
-                                        onclick="return myConfirm();">
+                                        <a href="{{ url('admin/skill-delete/'.$skill->id) }}" class="btn btn-sm btn-danger"
+                                        >
                                         <span><em class="icon ni ni-trash"></em></span>
                                       </a>
-                                      
-                                      <form id="delete-form-{{ $skill->id }}" action="{{ route('skill.destroy', $skill->id) }}"
-                                        method="POST" style="display: none;">
-                                        @csrf @method('delete')
-                                      </form>
+
+
                                     </td> 
                                   </tr> 
                                   @empty
@@ -125,35 +116,35 @@ skill
                     <input type="hidden" id="success" value="{{Session::get('success')}}" />
                     @endsection
 
-                    @section('scripts')
+  @section('scripts')
 
-                    <script type="text/javascript">
-                      function myConfirm() {
-                        var result = confirm("Want to delete?");
-                        if (result==true) {
-                          @if(!empty($skill->id))
-                          event.preventDefault(); document.getElementById('delete-form-{{ $skill->id }}').submit();
-                          @endif
-                        } else {
-                         return false;
-                       }
-                     }
-                   </script>
+  <script type="text/javascript">
+    function myConfirm() {
+      var result = confirm("Want to delete?");
+      if (result==true) {
+        @if(!empty($skill->id))
+        event.preventDefault(); document.getElementById('delete-form-{{ $skill->id }}').submit();
+        @endif
+      } else {
+       return false;
+     }
+   }
+  </script>
 
-                   @if (Session::get('success')) 
-                   <script>
-                    var message = $('#success').val();  
-                    if(message){
-                      Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: message,
-                        showConfirmButton: false,
-                        timer: 1500
-                      });
-                      e.preventDefault(); 
-                    }
-                  </script> 
-                  
-                  @endif 
-                  @endsection
+  @if (Session::get('success')) 
+  <script>
+  var message = $('#success').val();  
+  if(message){
+    Swal.fire({
+      position: 'top-end',
+      icon: 'success',
+      title: message,
+      showConfirmButton: false,
+      timer: 1500
+    });
+    e.preventDefault(); 
+  }
+  </script> 
+
+  @endif 
+  @endsection

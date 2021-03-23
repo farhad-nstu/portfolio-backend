@@ -42,9 +42,9 @@ class SkillController extends Controller
         return redirect()->route('skill.index')->with( 'message', 'Updated Successfully' );
     }
 
-    public function destroy($id)
+    public function skill_delete($id)
     {
-        $skill = Skill::find($id)->delete();
+        $skill = Skill::with('attributes')->where('id', $id)->delete();
         return redirect()->back()->with( 'success', 'Deleted successfully' );
     }
 }

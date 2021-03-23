@@ -71,6 +71,7 @@ Route::group(['prefix' => 'admin','middleware'=>'auth', 'namespace'=>'Admin'], f
     Route::resource('client', 'ClientController');
     Route::resource('about', 'AboutController');
     Route::resource('skill', 'SkillController');
+    Route::get('skill-delete/{id}', 'SkillController@skill_delete');
     Route::resource('attribute', 'AttributeController');
     Route::resource('award', 'AwardController');
     Route::resource('education', 'EducationController');
