@@ -52,6 +52,11 @@ Testimonials
           </div>
 
           <div class="form-group">
+            <label class="form-label" for="is_featured">Is Featured?</label>
+            <input type="checkbox" class="form-control form-control-lg" {{ old('is_featured') == 1 ? 'checked' : '' }} value="1" name="is_featured" id="is_featured">
+          </div>
+
+          <div class="form-group">
             <label class="form-label" for="designation">Designation<span style="color: red">*</span></label>
             <input type="text" class="form-control form-control-lg @error('designation') is-invalid @enderror" value="{{ old('designation') }}" name="designation" id="designation" required>
 
@@ -64,7 +69,7 @@ Testimonials
 
           <div class="form-group">
             <label class="form-label" for="description">Description<span style="color: red">*</span></label>
-            <textarea class="form-control form-control-lg @error('description') is-invalid @enderror" value="{{ old('description') }}" name="description" id="description" required></textarea>
+            <textarea class="form-control form-control-lg @error('description') is-invalid @enderror" name="description" id="description" required>{{ old('description') }}</textarea>
 
             @error('description')
             <span class="invalid-feedback" role="alert">
@@ -78,6 +83,20 @@ Testimonials
             <input type="file" class="form-control form-control-lg @error('image') is-invalid @enderror" value="{{ old('image') }}" name="image">
 
             @error('image')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="status">Status<span style="color: red">*</span></label>
+            <select class="form-control form-control-lg @error('status') is-invalid @enderror" name="status" id="status" required>
+              <option {{ old('status') == 1 ? 'selected' : '' }} value="1">Active</option>
+              <option {{ old('status') == 0 ? 'selected' : '' }} value="0">Inactive</option>
+            </select>
+
+            @error('status')
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUniqueIdToPortfolioMenusTable extends Migration
+class AddStatusToTestimonialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddUniqueIdToPortfolioMenusTable extends Migration
      */
     public function up()
     {
-        Schema::table('portfolio_menus', function (Blueprint $table) {
-            $table->string('unique_id');
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->tinyInteger('status')->default(1);
         });
     }
 
@@ -25,8 +25,8 @@ class AddUniqueIdToPortfolioMenusTable extends Migration
      */
     public function down()
     {
-        Schema::table('portfolio_menus', function (Blueprint $table) {
-            $table->dropColumn('unique_id');
+        Schema::table('testimonials', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 }

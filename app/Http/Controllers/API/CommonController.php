@@ -17,6 +17,9 @@ use App\Resume;
 use App\Models\PortfolioMenu;
 use App\Models\PortfolioMenuChild;
 use App\Models\Work;
+use App\Models\Testimonial;
+use App\Mail\ContactMail;
+use Mail;
 
 class CommonController extends Controller
 {
@@ -48,16 +51,16 @@ class CommonController extends Controller
         return response()->json($members);
     }
 
-    public function contact(Request $request)
-    {
-        $contact = new Contact;
-        $contact->name = $request->name;
-        $contact->email = $request->email;
-        $contact->phone = $request->phone;
-        $contact->message = $request->message;
-        $contact->save();
-        return response()->json(['success' => 'Contact Successfully Saved!']);
-    }
+    // public function contact(Request $request)
+    // {
+    //     $contact = new Contact;
+    //     $contact->name = $request->name;
+    //     $contact->email = $request->email;
+    //     $contact->phone = $request->phone;
+    //     $contact->message = $request->message;
+    //     $contact->save();
+    //     return response()->json(['success' => 'Contact Successfully Saved!']);
+    // }
 
     public function about()
     {
@@ -237,5 +240,25 @@ class CommonController extends Controller
         $works = Work::all();
         $url = asset('/');
         return response()->json(['works' => $works, 'url' => $url]);
+    }
+
+    public function fetch_testimonials()
+    {
+        $testimonials = Testimonial::where('status', 1)->orderBy('id', 'desc')->get();
+        $url = asset('/');
+        return response()->json(['testimonials' => $testimonials, 'url' => $url]);
+    }
+
+    public function contact(Request $request)
+    {
+        // return $request;
+        $contact = new Contact;
+        $contact->email = $request->email;
+        $contact->message = $request->message;
+
+        if($contact->save()) {
+            Mail::to("mohammadfarhad681@gmail.com")->send(new ContactMail($contact));
+            return $contact;
+        }
     }
 }

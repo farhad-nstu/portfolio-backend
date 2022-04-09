@@ -1,6 +1,6 @@
 @extends('dashboard.master.app')
 @section('title')
-Works
+Testimonial
 @endsection
 
 @section('content')
@@ -22,11 +22,11 @@ Works
       <div class="nk-block nk-block-middle nk-auth-body"> 
         <div class="nk-block-head">
           <div class="nk-block-head-content">
-            <h5 class="nk-block-title">Edit Works</h5> 
+            <h5 class="nk-block-title">Edit Testimonial</h5> 
           </div>
         </div>
 
-        <form method="POST" action="{{route('works.update', $work->id)}}" enctype="multipart/form-data">
+        <form method="POST" action="{{route('testimonials.update', $testimonial->id)}}" enctype="multipart/form-data">
           @method('put')
           @csrf
 
@@ -43,7 +43,7 @@ Works
 
           <div class="form-group">
             <label class="form-label">Title<span style="color: red">*</span></label>
-            <input type="text" class="form-control form-control-lg @error('title') is-invalid @enderror" value="{{ $work->title }}" name="title">
+            <input type="text" class="form-control form-control-lg @error('title') is-invalid @enderror" value="{{ $testimonial->title }}" name="title">
 
             @error('title')
             <span class="invalid-feedback" role="alert">
@@ -53,8 +53,24 @@ Works
           </div>
 
           <div class="form-group">
+            <label class="form-label" for="is_featured">Is Featured?</label>
+            <input type="checkbox" class="form-control form-control-lg" {{ $testimonial->is_featured == 1 ? 'checked' : '' }} value="1" name="is_featured" id="is_featured">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="designation">Designation<span style="color: red">*</span></label>
+            <input type="text" class="form-control form-control-lg @error('designation') is-invalid @enderror" value="{{ $testimonial->designation }}" name="designation" id="designation" required>
+
+            @error('designation')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
+
+          <div class="form-group">
             <label class="form-label" for="description">Description<span style="color: red">*</span></label>
-            <textarea class="form-control form-control-lg @error('description') is-invalid @enderror" value="{{ $work->description }}" name="description" id="description" required></textarea>
+            <textarea class="form-control form-control-lg @error('description') is-invalid @enderror" name="description" id="description" required>{{ $testimonial->description }}</textarea>
 
             @error('description')
             <span class="invalid-feedback" role="alert">
@@ -68,6 +84,20 @@ Works
             <input type="file" class="form-control form-control-lg @error('image') is-invalid @enderror" name="image">
 
             @error('image')
+            <span class="invalid-feedback" role="alert">
+              <strong>{{ $message }}</strong>
+            </span>
+            @enderror
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="status">Status<span style="color: red">*</span></label>
+            <select class="form-control form-control-lg @error('status') is-invalid @enderror" name="status" id="status" required>
+              <option {{ $testimonial->status == 1 ? 'selected' : '' }} value="1">Active</option>
+              <option {{ $testimonial->status == 0 ? 'selected' : '' }} value="0">Inactive</option>
+            </select>
+
+            @error('status')
             <span class="invalid-feedback" role="alert">
               <strong>{{ $message }}</strong>
             </span>
@@ -89,29 +119,4 @@ Works
 <!-- wrap @e -->
 </div>
 <!-- content @e -->
-@endsection
-
-@section('scripts')
-  <link rel="stylesheet" href="{{ asset('/') }}assets/css/editors/summernote.css?ver=1.9.2">
-  <script src="{{ asset('/') }}assets/js/libs/editors/summernote.js?ver=1.9.2"></script>
-  <script src="{{ asset('/') }}assets/js/editors.js?ver=1.9.2"></script>
-  <script type="text/javascript">
-    function get_sub_cat(id) {
-      $.ajaxSetup({
-        headers: {
-          'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-      });
-      $.ajax({
-        type: "post",
-        url : '{{url("admin/subCat")}}',
-        data: {
-          catId: id,
-        },
-        success:function(data) {
-          $('#subCat').empty().html(data);
-        }
-      });
-    }
-  </script>
 @endsection
