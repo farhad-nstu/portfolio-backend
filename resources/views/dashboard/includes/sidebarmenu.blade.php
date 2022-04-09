@@ -302,7 +302,66 @@
           </ul>
         </li>
 
-        
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">Resume</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('resume') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">List</span>
+              </a>
+            </li>
+          </ul>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('insert.resume') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">Add Resume</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+  
+        <li class="nk-menu-item">
+          <a href="{{ route('menus.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span> 
+            <span class="nk-menu-text">Menus</span>
+          </a>
+        </li>  
+
+        <li class="nk-menu-item has-sub">
+          <a href="javascript:void(0)" class="nk-menu-link nk-menu-toggle">
+            <span class="nk-menu-icon"><em class="icon ni ni-square"></em></span>
+            <span class="nk-menu-text">Portfolio</span>
+          </a>
+
+          <ul class="nk-menu-sub">
+            <li class="nk-menu-item">
+              <a href="{{ route('portfolioMenus.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">Portfolio Menu</span>
+              </a>
+            </li>
+            <li class="nk-menu-item">
+              <a href="{{ route('portfolioMenuChilds.index') }}" class="nk-menu-link">
+                <span class="nk-menu-icon"><em class="icon ni ni-view-row"></em></span>
+                <span class="nk-menu-text">Menu Child</span>
+              </a>
+            </li>
+          </ul>
+        </li>
+
+        <li class="nk-menu-item">
+          <a href="{{ route('works.index') }}" class="nk-menu-link">
+            <span class="nk-menu-icon"><em class="icon ni ni-bitcoin-cash"></em></span> 
+            <span class="nk-menu-text">Works</span>
+          </a>
+        </li> 
 
         @endif
       </ul>

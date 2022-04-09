@@ -65,16 +65,11 @@
                                   <a class="btn btn-sm btn-info" href="{{ route('project.show', $project->id) }}" title="Details">
                                     <span><em class="icon ni ni-eye-fill"></em></span>
                                   </a>
-    
-                                  <a href="#" class="btn btn-sm btn-danger"
-                                  onclick="return myConfirm();">
-                                  <span><em class="icon ni ni-trash"></em></span>
+
+                                  <a class="btn btn-sm btn-danger" href="{{ url('admin/project-delete/'. $project->id) }}" title="Details">
+                                    <span><em class="icon ni ni-trash"></em></span>
                                   </a>
     
-                                  <form id="delete-form-{{ $project->id }}" action="{{ route('project.destroy', $project->id) }}"
-                                    method="POST" style="display: none;">
-                                    @csrf @method('delete')
-                                  </form>
                             </td> 
                         </tr> 
                      @empty

@@ -30,4 +30,9 @@ Route::post('contact', 'API\CommonController@contact');
 Route::get('about', 'API\CommonController@about');
 Route::get('skills', 'API\CommonController@skill');
 Route::get('educations', 'API\CommonController@education');
+Route::get('resume', 'API\CommonController@resume');
 
+/// New Portfolio
+Route::get('menus', 'API\CommonController@fetch_menu');
+Route::get('menus/{id}', 'API\CommonController@fetch_menu_childs');
+Route::get('works', 'API\CommonController@fetch_works');

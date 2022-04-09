@@ -66,6 +66,7 @@ Route::get('/login/facebook/callback', 'Auth\LoginController@handleProviderCallb
 ///// new added /////
 Route::group(['prefix' => 'admin','middleware'=>'auth', 'namespace'=>'Admin'], function () {
     Route::resource('project', 'ProjectController');
+    Route::get('project-delete/{id}', 'ProjectController@delete_project');
     Route::resource('service', 'ServiceController');
     Route::resource('member', 'MemberController');
     Route::resource('client', 'ClientController');
@@ -75,5 +76,18 @@ Route::group(['prefix' => 'admin','middleware'=>'auth', 'namespace'=>'Admin'], f
     Route::resource('attribute', 'AttributeController');
     Route::resource('award', 'AwardController');
     Route::resource('education', 'EducationController');
+
+    Route::get('resume', 'ResumeController@index')->name('resume');
+    Route::get('insert-resume', 'ResumeController@insert_resume')->name('insert.resume');
+    Route::post('resume-store', 'ResumeController@resume_store')->name('resume.store');
+    Route::get('resume-edit', 'ResumeController@resume_edit')->name('resume.edit');
+    Route::get('file-download/{id}', 'ResumeController@file_download')->name('file.download');
+
+    // new portfolio 
+    Route::resource('menus', 'MenuController');
+    Route::resource('portfolioMenus', 'PortfolioMenuController');
+    Route::resource('portfolioMenuChilds', 'PortfolioMenuChildController');
+    Route::resource('works', 'WorkController');
+    Route::resource('testimonials', 'TestimonialController');
 });
 

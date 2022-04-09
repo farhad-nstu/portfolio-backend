@@ -13,6 +13,10 @@ use Auth;
 use App\About;
 use App\Skill;
 use App\Education;
+use App\Resume;
+use App\Models\PortfolioMenu;
+use App\Models\PortfolioMenuChild;
+use App\Models\Work;
 
 class CommonController extends Controller
 {
@@ -75,6 +79,15 @@ class CommonController extends Controller
         return response()->json($educations);
     }
 
+    public function resume()
+    {
+        $resume = Resume::where('id', 1)->pluck('resume')->first();
+        $headers = [
+              'Content-Type' => 'application/pdf',
+           ];
+        return response()->download($resume, 'filename.pdf', $headers);
+    }
+
     public function get_subcategories()
     {
     	$subcategories = SubCategory::all();
@@ -129,80 +142,100 @@ class CommonController extends Controller
     		], 200); 
     	} else {
     		$wish = new Wishlist;
-          $wish->user_id = $userId;
-          $wish->product_id = $productId;
-          $wish->save();
-          return response()->json([
-             'message' => 'Add To Your Wishlist',
-             'result' => $wish
-         ]); 
-      }
-  }
-
-  public function add_to_cart(Request $request, $productId)
-  {
-    $product = Product::find($productId);
-    $userId = Auth::user()->id;
-    $check = DB::table('carts')->where('user_id', $userId)->where('product_id', $productId)->first();
-    if($check){
-        $data = [
-            'qty' => $request->qty,
-            'size' => $request->size,
-            'color' => $request->color,
-            'subtotal' => $check->price*$request->qty
-        ];
-
-        DB::table('carts')->where('id', $check->id)->update($data);
-        return response()->json("Cart Updated Successfully");
-    } else {
-        $data = [];
-        $data = [
-            'product_id' => $productId,
-            'user_id' => $userId,
-            'product_name' => $product->name,
-            'qty' => $request->qty,
-            'price' => $product->price,
-            'size' => $request->size,
-            'color' => $request->color,
-            'subtotal' => $product->price*$request->qty
-        ];
-
-        DB::table('carts')->insert($data);
-        return response()->json("Product Add To Cart Successfully");
+            $wish->user_id = $userId;
+            $wish->product_id = $productId;
+            $wish->save();
+            return response()->json([
+                'message' => 'Add To Your Wishlist',
+                'result' => $wish
+            ]); 
+        }
     }
-}
 
-public function update_cart(Request $request, $cartId)
-{
-    $cartProduct = Cart::find($cartId);
-    $data = [
-        'qty' => $request->qty,
-        'size' => $request->size,
-        'color' => $request->color,
-        'subtotal' => $cartProduct->price*$request->qty
-    ];
+    public function add_to_cart(Request $request, $productId)
+    {
+        $product = Product::find($productId);
+        $userId = Auth::user()->id;
+        $check = DB::table('carts')->where('user_id', $userId)->where('product_id', $productId)->first();
+        if($check){
+            $data = [
+                'qty' => $request->qty,
+                'size' => $request->size,
+                'color' => $request->color,
+                'subtotal' => $check->price*$request->qty
+            ];
 
-    DB::table('carts')->where('id', $cartId)->update($data);
-    return response()->json("Cart Updated Successfully");
-}
+            DB::table('carts')->where('id', $check->id)->update($data);
+            return response()->json("Cart Updated Successfully");
+        } else {
+            $data = [];
+            $data = [
+                'product_id' => $productId,
+                'user_id' => $userId,
+                'product_name' => $product->name,
+                'qty' => $request->qty,
+                'price' => $product->price,
+                'size' => $request->size,
+                'color' => $request->color,
+                'subtotal' => $product->price*$request->qty
+            ];
 
-public function delete_cart($id)
-{
-    Cart::where('id', $id)->where('user_id', Auth::user()->id)->delete();
-    return response()->json("Cart Deleted Successfully");
-}
+            DB::table('carts')->insert($data);
+            return response()->json("Product Add To Cart Successfully");
+        }
+    }
 
-public function get_cart_items()
-{
-    $items = Cart::where('user_id', Auth::user()->id)->get();
-    return response()->json($items);
-}
+    public function update_cart(Request $request, $cartId)
+    {
+        $cartProduct = Cart::find($cartId);
+        $data = [
+            'qty' => $request->qty,
+            'size' => $request->size,
+            'color' => $request->color,
+            'subtotal' => $cartProduct->price*$request->qty
+        ];
 
-    ///// Orders ////
-public function get_mycart()
-{
-    $items = Cart::where('user_id', Auth::user()->id)->get();
-    $total = $items->sum('subtotal');
-    return response()->json(['items' => $items, 'total' => $total]);
-}
+        DB::table('carts')->where('id', $cartId)->update($data);
+        return response()->json("Cart Updated Successfully");
+    }
+
+    public function delete_cart($id)
+    {
+        Cart::where('id', $id)->where('user_id', Auth::user()->id)->delete();
+        return response()->json("Cart Deleted Successfully");
+    }
+
+    public function get_cart_items()
+    {
+        $items = Cart::where('user_id', Auth::user()->id)->get();
+        return response()->json($items);
+    }
+
+    public function get_mycart()
+    {
+        $items = Cart::where('user_id', Auth::user()->id)->get();
+        $total = $items->sum('subtotal');
+        return response()->json(['items' => $items, 'total' => $total]);
+    }
+
+    /// New Portfolio
+    public function fetch_menu()
+    {
+        $menus = PortfolioMenu::all();
+        return response()->json($menus);
+    }
+
+    public function fetch_menu_childs($id)
+    {
+        $menuChilds = PortfolioMenu::with('childs')->where('unique_id', $id)->get();
+        $url = asset('/');
+        return response()->json(['menuChilds' => $menuChilds, 'url' => $url]);
+    }
+
+    public function fetch_works()
+    {
+        $works = Work::all();
+        $url = asset('/');
+        return response()->json(['works' => $works, 'url' => $url]);
+    }
 }

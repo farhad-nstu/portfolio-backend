@@ -72,14 +72,16 @@ class ProjectController extends Controller
         $project->description = $request->description;
         $project->pure_desc = $description;
         $project->link = $request->link;
+        // dd(asset($project->image));
 
         if(!empty($request->image)){
+            unlink($project->image);
 	        $image = $request->file( 'image' );
             $filename    = $image->getClientOriginalName();
             $image_resize = Image::make( $image->getRealPath() );
             $image_resize->resize( 800, 800 );
             $image_resize->save( public_path( 'images/' .$filename ) );
-	        unlink($project->image);
+	        
 	        $project->image = 'images/'.$filename;
         }
 
@@ -93,13 +95,10 @@ class ProjectController extends Controller
     	return view('dashboard.projects.show', compact('project'));
     }
 
-    public function destroy($id)
+    public function delete_project($id)
     {
         $project = Project::find($id);
-        $images = json_decode($project->image);
-        foreach ($images as $image) {
-        	unlink($image);
-        }
+        unlink($project->image);
         $project->delete();
         return redirect()->back()->with( 'success', 'Project deleted successfully' );
     }
